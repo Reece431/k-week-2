@@ -26,6 +26,8 @@ $col1: #fff;
 $btn1: #ad0d33;
 $btn2: #fbb03b;
 
+$i: 10;
+
 *{
     padding:0;
     margin:0;
@@ -33,15 +35,14 @@ $btn2: #fbb03b;
     font-family: 'Roboto', sans-serif;
     max-width: 100%;
 }
+html{
+    scroll-behavior: smooth!important;
+}
 body{
     display:grid;
-    max-width: 90%;
+    max-width: 97%;
     margin:0 auto;
     background: #EFEFEF;
-    scroll-behavior: smooth;
-    @include mqMax(1335px){
-        max-width: 95%;
-    }
     @include mqMax(600px){
         max-width: 100%;
     }
@@ -53,11 +54,11 @@ a{
 
 nav{
     align-items: center;
-    padding: .4em 0;
+    padding: .4em 1em;
     display:grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: space-between;
-    background: $navCol;
+    background: $col1;
     .logo{
         width: 7em;
         cursor: pointer;
@@ -65,17 +66,38 @@ nav{
     .btns{
         justify-self: end;
         button{
-            @include btn($btn1);
+            @include btn($btn1);           
+        }
+        .loginBtn{
+            background:$btn1;
         }
     }
 }
 
 .offer{
+    position: relative;
     display: grid;
     grid-template-rows: reapeat(5, 1fr);
     justify-content: center;
     align-items: center;
-    background: #000;
+    overflow:hidden;
+    .overlay{
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        background: rgb(255,20,26);
+        .bgVideo{
+            opacity: 0.5;
+            min-width:100%;
+            min-height: 100%;
+            @include mqMax(1026px){
+                min-width: 200%;
+            }
+            @include mqMax(716px){
+                min-width: 300%;
+            }
+        }
+    }
     .txt{
         text-align: center;
         font-size: 3em;
@@ -83,48 +105,98 @@ nav{
         padding: 0.5em 0;
         border-bottom-left-radius: 50%;
         border-bottom-right-radius: 50%;
-        padding-bottom: 1.5em;
-        color: $col1;
-        background: $navCol;
+        padding-bottom: 1em;
+        color: $navCol;
+        cursor: pointer;
+        background: $col1;
+        z-index: $i;
+        @include mqMax(1222px){
+            font-size: 2em;
+        }
     }
-    .video{
+    .titleWrap{
+        width: 60%;
+        margin: 0 auto;
+    }
+    .hl{
+        color: $btn2;
+    }
+    .sign{
         height: 25em;
-        video{
-            height: 100%;
-            width: 100%;
+        margin: 1em 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: $i;
+        background: url('../sign.png');
+        background-position: center;
+        background-size: contain;
+        background-repeat:no-repeat;
+        cursor: pointer;
+        p{
+            color: $navCol;
+            font-size: 2.8em;
+            text-transform: uppercase;
+            @include mqMax(968px){
+                font-size: 2em;
+            }
+            @include mqMax(474px){
+                margin-top: 1em;
+            }
         }
     }
     .offerBtn{
-        @include btn($btn2);
-        width: 10em;
-        font-size: 1.5em;
-        padding: 0.5em 2em;
-        cursor: pointer;
-        justify-self: center;
-    }
+            position:relative;
+            width: 10em;
+            @include btn($btn2);
+            font-size: 1.5em;
+            padding: 0.5em 2em;
+            margin-bottom: .5em;
+            justify-self: center;
+            z-index: $i;
+        }
     .rules{
-        border-top: solid .2em #000;
+        border-top: solid .1em #000;
         color: $col1;
         text-align: center;
-        padding: 2em 4em;
-        background: rgba(0,0,0,0.5);
+        padding: 1.5em 4em;
+        background: rgb(255,20,26);
+        z-index: $i;
     }
     .list{
         display: grid;
         grid-template-columns: 2fr 1fr 2fr 1fr 2fr;
         justify-items: center;
+        align-items: center;
+        text-align:center;
         padding: 3em 0;
         background: #EFEFEF;
+        z-index: $i;
+        @include mqMax(619px){
+            grid-template-columns: 1fr;
+            grid-template-rows: repeat(5, 1fr);
+        }
+
+        .lTxt{
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+        .fa-gem{
+            color: $btn2;
+            font-size: 1.2em;
+        }
     }
 }
 
 .popup{
     position: fixed;
-    width: 90%;
+    width: 97%;
     margin: 0 auto;
-    display: grid;
+    display:grid;
     bottom: -20em;
-    transition: all 500ms ease-in-out;
+    transition: bottom 500ms ease-in-out;
+    z-index: 11;
     @include mqMax(1335px){
         max-width: 95%;
     }
@@ -132,7 +204,6 @@ nav{
         max-width: 100%;
     }
 }
-
 
 footer{
     display:grid;
@@ -144,6 +215,7 @@ footer{
     padding-top: 1em;
     color: $col1;
     background: $navCol;
+    z-index: $i;
     .copyright{
         margin: 1em 3em;
         padding: 1em;
@@ -159,5 +231,19 @@ footer{
         padding: 1em;
         color: $navCol;
         background: #fff;
+
+        tr{
+            margin: .5em .2em;
+        }
+        .TermsPageInnerTable{
+            margin:1.5rem 0
+        }
+        .TextBold{
+            margin-top: 1em;
+            font-weight: 800;
+        }
+        #tblOuterContent td {
+            padding: .5em;
+        }
     }
 }
